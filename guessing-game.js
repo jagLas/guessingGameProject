@@ -45,6 +45,14 @@ const askGuess = () => {
     }
 }
 
+function askLimit() {
+    rl.question('Enter number of turns: ', turns => {
+        numAttempts = Number(turns);
+        console.log('You have chosen ' + turns + ' turns.');
+        askRange()
+    })
+}
+
 function askRange() {
     rl.question('Enter a min number: ', (min) => {
         rl.question('Enter a max number: ', (max) => {
@@ -59,4 +67,4 @@ function askRange() {
     })
 };
 
-askRange();
+askLimit();
