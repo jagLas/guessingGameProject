@@ -34,4 +34,18 @@ const askGuess = () => {
     rl.question('Enter a guess: ', checkGuess)
 }
 
-// askGuess()
+function askRange() {
+    rl.question('Enter a min number: ', (min) => {
+        rl.question('Enter a max number: ', (max) => {
+
+            console.log(`I'm thinking of a number between ${min} and ${max}...`)
+
+            secretNumber = randomInRange(Number(min), Number(max)); //sets secret number to random int
+            // console.log(secretNumber);
+
+            askGuess();
+        })
+    })
+};
+
+askRange();
