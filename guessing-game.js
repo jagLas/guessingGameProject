@@ -10,7 +10,8 @@ function randomInRange(min, max) {
 }
 
 //Defines target number
-secretNumber = randomInRange(0,100);
+secretNumber = 0;
+numAttempts = 5;
 
 
 //function to evaluate the number and respond with a hint or closes if correct.
@@ -30,8 +31,18 @@ const checkGuess = (num) => {
     }
 };
 
+
 const askGuess = () => {
+    numAttempts--;  //decreases num of turns remaining
+
+    if (numAttempts >= 0) {
     rl.question('Enter a guess: ', checkGuess)
+
+    //ends the game if no attempts are left.
+    } else {
+        console.log('Game over. You lose!');
+        rl.close();
+    }
 }
 
 function askRange() {
