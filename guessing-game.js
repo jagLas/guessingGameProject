@@ -57,14 +57,40 @@ function askRange() {
     rl.question('Enter a min number: ', (min) => {
         rl.question('Enter a max number: ', (max) => {
 
-            console.log(`I'm thinking of a number between ${min} and ${max}...`)
-
             secretNumber = randomInRange(Number(min), Number(max)); //sets secret number to random int
-            // console.log(secretNumber);
+
+            //rates the difficulty of the parameters
+            const difficulty = findDifficulty(min, max, numAttempts);
+
+            //prints difficulty and min and max
+            console.log(`This game should be ${difficulty}. Good luck!`)
+            console.log(`I'm thinking of a number between ${min} and ${max}...`)
 
             askGuess();
         })
     })
 };
+
+function findDifficulty(min, max, turns) {
+    min = Number(min);
+    max = Number(max);
+    let range = max - min;
+    let avgTurns = 0;
+
+    //divides decision space by two and counts how many times it needs to be halved to find solution.
+    while (range > 1) {
+        range /= 2;
+        avgTurns ++;
+    }
+
+    //rates difficulty by comparing avgTurns to completion
+    if (turns < avgTurns) {
+        return 'harder than average'
+    } else if ( turns > avgTurns) {
+        return 'easier than average'
+    } else {
+        return 'average difficulty'
+    }
+}
 
 askLimit();
